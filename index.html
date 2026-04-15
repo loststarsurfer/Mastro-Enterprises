@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mastro Enterprises | Digital Marketing Consultant — Columbus, OH</title>
+<meta name="description" content="Al Mastro is a Digital Marketing Consultant specializing in SEO, web development, and data-driven growth strategies for businesses in Columbus, OH and beyond.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-primary: #0a0e17;
+  --bg-secondary: #111827;
+  --bg-card: #161d2e;
+  --bg-card-hover: #1c2540;
+  --accent-cyan: #00e5ff;
+  --accent-green: #00ff88;
+  --accent-purple: #a855f7;
+  --accent-orange: #ff6b35;
+  --text-primary: #e8ecf4;
+  --text-secondary: #8892a8;
+  --text-dim: #4a5568;
+  --border: rgba(136, 146, 168, 0.12);
+  --border-glow: rgba(0, 229, 255, 0.15);
+  --grid-line: rgba(136, 146, 168, 0.05);
+  --font-display: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Grid Background ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Glow Orbs ── */
+.glow-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.3;
+}
+.glow-orb--cyan { width: 500px; height: 500px; background: var(--accent-cyan); top: -100px; right: -100px; }
+.glow-orb--green { width: 400px; height: 400px; background: var(--accent-green); bottom: 20%; left: -150px; opacity: 0.15; }
+.glow-orb--purple { width: 350px; height: 350px; background: var(--accent-purple); top: 50%; right: 10%; opacity: 0.12; }
+
+/* ── Layout ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+/* ── Navigation ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10, 14, 23, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+.nav.scrolled { background: rgba(10, 14, 23, 0.95); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; height: 72px;
+}
+.nav-logo {
+  font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem;
+  color: var(--accent-cyan); text-decoration: none; letter-spacing: 0.05em;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo .dot { width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; animation: pulse-dot 2s ease infinite; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none; font-size: 0.875rem;
+  font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s;
+  font-family: var(--font-mono); font-size: 0.8rem;
+}
+.nav-links a:hover { color: var(--accent-cyan); }
+.nav-cta {
+  background: transparent; border: 1px solid var(--accent-cyan); color: var(--accent-cyan);
+  padding: 8px 20px; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 500;
+  cursor: pointer; transition: all 0.3s; text-decoration: none; letter-spacing: 0.05em;
+}
+.nav-cta:hover { background: var(--accent-cyan); color: var(--bg-primary); }
+
+/* Mobile nav */
+.nav-toggle { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 120px 0 80px;
+}
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-green);
+  background: rgba(0, 255, 136, 0.06); border: 1px solid rgba(0, 255, 136, 0.15);
+  padding: 6px 14px; margin-bottom: 24px; letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.hero-tag .blink { animation: blink 1s step-end infinite; }
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.1;
+  margin-bottom: 20px; letter-spacing: -0.02em;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  font-size: 1.1rem; color: var(--text-secondary); max-width: 500px;
+  margin-bottom: 36px; line-height: 1.7;
+}
+.hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-cyan), #00b8d4);
+  color: var(--bg-primary); padding: 14px 32px; font-family: var(--font-mono);
+  font-size: 0.82rem; font-weight: 700; border: none; cursor: pointer;
+  letter-spacing: 0.05em; transition: all 0.3s; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 229, 255, 0.25); }
+.btn-secondary {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--text-primary); padding: 14px 32px; font-family: var(--font-mono);
+  font-size: 0.82rem; font-weight: 500; cursor: pointer;
+  letter-spacing: 0.05em; transition: all 0.3s; text-decoration: none;
+}
+.btn-secondary:hover { border-color: var(--text-secondary); }
+
+/* Hero Dashboard */
+.hero-dashboard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-dashboard::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green), var(--accent-purple));
+}
+.dash-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+}
+.dash-header-title { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+.dash-live {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-green);
+}
+.dash-live .dot { width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; animation: pulse-dot 1.5s ease infinite; }
+.dash-metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 20px; }
+.dash-metric {
+  background: var(--bg-secondary); padding: 16px; border: 1px solid var(--border);
+  transition: border-color 0.3s;
+}
+.dash-metric:hover { border-color: var(--border-glow); }
+.dash-metric-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+.dash-metric-value { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: var(--text-primary); }
+.dash-metric-change { font-family: var(--font-mono); font-size: 0.7rem; margin-top: 4px; }
+.dash-metric-change.up { color: var(--accent-green); }
+.dash-metric-change.down { color: var(--accent-orange); }
+.dash-chart {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  padding: 16px; height: 120px; position: relative; overflow: hidden;
+}
+.dash-chart-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+
+/* Mini chart SVG */
+.mini-chart { width: 100%; height: 70px; }
+.mini-chart polyline {
+  fill: none; stroke: var(--accent-cyan); stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.mini-chart .area {
+  fill: url(#chartGrad); stroke: none; opacity: 0.3;
+}
+
+/* ── Section Styles ── */
+section { padding: 100px 0; position: relative; z-index: 1; }
+.section-tag {
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-cyan);
+  letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-tag::before { content: '//'; color: var(--text-dim); }
+.section-title {
+  font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700;
+  margin-bottom: 16px; letter-spacing: -0.01em; line-height: 1.2;
+}
+.section-subtitle {
+  font-size: 1.05rem; color: var(--text-secondary); max-width: 600px;
+  margin-bottom: 60px; line-height: 1.7;
+}
+
+/* ── Services ── */
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.service-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  padding: 32px; transition: all 0.4s ease; position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--accent-cyan); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.service-card:hover::before { transform: scaleX(1); }
+.service-card:hover { border-color: var(--border-glow); transform: translateY(-4px); }
+.service-icon {
+  width: 48px; height: 48px; border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; font-size: 1.2rem; color: var(--accent-cyan);
+  background: rgba(0, 229, 255, 0.04);
+}
+.service-card h3 { font-size: 1.1rem; margin-bottom: 12px; font-weight: 600; }
+.service-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+.service-card .service-tag {
+  display: inline-block; margin-top: 16px; font-family: var(--font-mono);
+  font-size: 0.68rem; color: var(--accent-green); letter-spacing: 0.08em;
+}
+
+/* ── Stats Bar ── */
+.stats-bar {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--border); background: var(--bg-card);
+}
+.stat-item {
+  padding: 40px 32px; text-align: center;
+  border-right: 1px solid var(--border);
+}
+.stat-item:last-child { border-right: none; }
+.stat-number {
+  font-family: var(--font-mono); font-size: 2.5rem; font-weight: 700;
+  color: var(--accent-cyan); margin-bottom: 8px;
+}
+.stat-label { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* ── Process ── */
+.process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.process-step {
+  background: var(--bg-card); padding: 36px 28px;
+  border: 1px solid var(--border); position: relative;
+  transition: all 0.3s;
+}
+.process-step:hover { background: var(--bg-card-hover); }
+.process-num {
+  font-family: var(--font-mono); font-size: 3rem; font-weight: 700;
+  color: rgba(0, 229, 255, 0.08); position: absolute; top: 16px; right: 20px;
+}
+.process-step h3 { font-size: 1rem; margin-bottom: 10px; font-weight: 600; }
+.process-step p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; }
+
+/* ── About ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.about-text p { color: var(--text-secondary); margin-bottom: 20px; line-height: 1.8; font-size: 1rem; }
+.about-credentials { display: flex; flex-direction: column; gap: 16px; margin-top: 28px; }
+.credential {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px; background: var(--bg-card); border: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);
+}
+.credential .icon { color: var(--accent-cyan); font-size: 1rem; flex-shrink: 0; }
+.about-terminal {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 0.8rem; overflow: hidden;
+}
+.terminal-header {
+  display: flex; align-items: center; gap: 8px; padding: 12px 16px;
+  background: var(--bg-card); border-bottom: 1px solid var(--border);
+}
+.terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+.terminal-dot--r { background: #ff5f57; }
+.terminal-dot--y { background: #febc2e; }
+.terminal-dot--g { background: #28c840; }
+.terminal-title { margin-left: 8px; color: var(--text-dim); font-size: 0.7rem; }
+.terminal-body { padding: 20px; line-height: 2; }
+.terminal-body .prompt { color: var(--accent-green); }
+.terminal-body .cmd { color: var(--text-primary); }
+.terminal-body .output { color: var(--text-dim); }
+.terminal-body .highlight { color: var(--accent-cyan); }
+
+/* ── Testimonials ── */
+.testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.testimonial-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  padding: 32px; position: relative;
+}
+.testimonial-card::before {
+  content: '"'; font-size: 4rem; color: var(--accent-cyan); opacity: 0.15;
+  position: absolute; top: 10px; left: 20px; font-family: Georgia, serif;
+}
+.testimonial-card p {
+  font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8;
+  margin-bottom: 20px; padding-top: 16px; font-style: italic;
+}
+.testimonial-author { font-family: var(--font-mono); font-size: 0.78rem; }
+.testimonial-author .name { color: var(--text-primary); font-weight: 600; }
+.testimonial-author .role { color: var(--text-dim); margin-top: 2px; }
+
+/* ── Contact ── */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.contact-info-block {
+  background: var(--bg-card); border: 1px solid var(--border); padding: 32px;
+}
+.contact-info-block h3 { font-size: 1.3rem; margin-bottom: 20px; font-weight: 600; }
+.contact-detail {
+  display: flex; align-items: center; gap: 14px; padding: 14px 0;
+  border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text-secondary);
+}
+.contact-detail:last-child { border-bottom: none; }
+.contact-detail .icon { color: var(--accent-cyan); width: 20px; text-align: center; }
+.contact-form {
+  background: var(--bg-card); border: 1px solid var(--border); padding: 32px;
+}
+.contact-form h3 { font-size: 1.3rem; margin-bottom: 20px; font-weight: 600; }
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block; font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+.form-group input, .form-group textarea {
+  width: 100%; padding: 12px 16px; background: var(--bg-secondary);
+  border: 1px solid var(--border); color: var(--text-primary);
+  font-family: var(--font-display); font-size: 0.9rem;
+  transition: border-color 0.3s; outline: none;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--accent-cyan); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-submit {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg, var(--accent-cyan), #00b8d4);
+  color: var(--bg-primary); font-family: var(--font-mono); font-size: 0.82rem;
+  font-weight: 700; border: none; cursor: pointer; letter-spacing: 0.05em;
+  transition: all 0.3s; margin-top: 8px;
+}
+.form-submit:hover { box-shadow: 0 8px 30px rgba(0, 229, 255, 0.25); }
+
+/* ── Footer ── */
+.footer {
+  border-top: 1px solid var(--border); padding: 48px 0 32px;
+  position: relative; z-index: 1;
+}
+.footer-inner { display: flex; justify-content: space-between; align-items: start; margin-bottom: 40px; }
+.footer-brand { max-width: 350px; }
+.footer-brand .logo {
+  font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem;
+  color: var(--accent-cyan); margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+}
+.footer-brand .logo .dot { width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; }
+.footer-brand p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; }
+.footer-links-group h4 {
+  font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px;
+}
+.footer-links-group a {
+  display: block; color: var(--text-secondary); text-decoration: none;
+  font-size: 0.85rem; padding: 4px 0; transition: color 0.2s;
+}
+.footer-links-group a:hover { color: var(--accent-cyan); }
+.footer-bottom {
+  border-top: 1px solid var(--border); padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim);
+}
+
+/* ── Animations ── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+@keyframes countUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.animate-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-dashboard { max-width: 550px; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-cta.desktop { display: none; }
+  .nav-toggle { display: block; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 72px; left: 0; right: 0;
+    background: rgba(10, 14, 23, 0.98); padding: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero { padding: 100px 0 60px; }
+  .hero h1 { font-size: 2.2rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .stats-bar { grid-template-columns: 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .stat-item:last-child { border-bottom: none; }
+  .footer-inner { flex-direction: column; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .dash-metrics { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .hero-buttons { flex-direction: column; }
+  .btn-primary, .btn-secondary { width: 100%; text-align: center; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="glow-orb glow-orb--cyan"></div>
+<div class="glow-orb glow-orb--green"></div>
+<div class="glow-orb glow-orb--purple"></div>
+
+<!-- ════════════════ NAV ════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo"><span class="dot"></span> MASTRO_ENTERPRISES</a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#testimonials">Results</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta desktop">START A PROJECT →</a>
+  </div>
+</nav>
+
+<!-- ════════════════ HERO ════════════════ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="blink">▌</span> Digital Marketing Consultant — Columbus, OH
+        </div>
+        <h1>Data-driven growth<br>for <span class="gradient-text">modern brands.</span></h1>
+        <p>I help businesses cut through the noise with measurable marketing strategies, high-performance websites, and SEO that actually moves the needle. No fluff — just results.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn-primary">GET A FREE AUDIT →</a>
+          <a href="#services" class="btn-secondary">VIEW SERVICES</a>
+        </div>
+      </div>
+      <div class="hero-dashboard">
+        <div class="dash-header">
+          <span class="dash-header-title">Client Performance Dashboard</span>
+          <span class="dash-live"><span class="dot"></span> LIVE</span>
+        </div>
+        <div class="dash-metrics">
+          <div class="dash-metric">
+            <div class="dash-metric-label">Organic Traffic</div>
+            <div class="dash-metric-value" data-count="12847">0</div>
+            <div class="dash-metric-change up">↑ 34.2% vs last month</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-label">Conversion Rate</div>
+            <div class="dash-metric-value">4.8<span style="font-size: 1rem;">%</span></div>
+            <div class="dash-metric-change up">↑ 1.2% vs last month</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-label">Leads Generated</div>
+            <div class="dash-metric-value" data-count="384">0</div>
+            <div class="dash-metric-change up">↑ 52 new this week</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-label">ROI</div>
+            <div class="dash-metric-value">312<span style="font-size: 1rem;">%</span></div>
+            <div class="dash-metric-change up">↑ Campaign avg.</div>
+          </div>
+        </div>
+        <div class="dash-chart">
+          <div class="dash-chart-label">Traffic Trend — 30 Days</div>
+          <svg class="mini-chart" viewBox="0 0 400 70" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="var(--accent-cyan)" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="var(--accent-cyan)" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <polyline class="area" points="0,60 20,55 40,50 60,52 80,40 100,42 120,35 140,38 160,28 180,30 200,22 220,25 240,18 260,20 280,15 300,12 320,14 340,10 360,8 380,5 400,3 400,70 0,70"/>
+            <polyline points="0,60 20,55 40,50 60,52 80,40 100,42 120,35 140,38 160,28 180,30 200,22 220,25 240,18 260,20 280,15 300,12 320,14 340,10 360,8 380,5 400,3"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ STATS BAR ════════════════ -->
+<section style="padding: 0;">
+  <div class="container">
+    <div class="stats-bar animate-in">
+      <div class="stat-item">
+        <div class="stat-number" data-count="10">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="150">0</div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3x</div>
+        <div class="stat-label">Avg. Traffic Growth</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">98<span style="font-size: 1.5rem;">%</span></div>
+        <div class="stat-label">Client Retention</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SERVICES ════════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="section-tag">Services</div>
+    <h2 class="section-title">What I bring to the table.</h2>
+    <p class="section-subtitle">Full-stack digital marketing solutions designed to generate measurable outcomes — from strategy to execution.</p>
+    <div class="services-grid">
+      <div class="service-card animate-in">
+        <div class="service-icon">📊</div>
+        <h3>SEO & Organic Growth</h3>
+        <p>Technical audits, keyword strategy, on-page optimization, and link building that drives sustainable organic traffic growth.</p>
+        <span class="service-tag">→ Avg. +180% traffic in 6 months</span>
+      </div>
+      <div class="service-card animate-in">
+        <div class="service-icon">⚡</div>
+        <h3>Web Development</h3>
+        <p>High-performance, conversion-optimized websites built with modern tech stacks. Fast, accessible, and designed to convert.</p>
+        <span class="service-tag">→ Custom builds & CMS solutions</span>
+      </div>
+      <div class="service-card animate-in">
+        <div class="service-icon">🎯</div>
+        <h3>Paid Media & PPC</h3>
+        <p>Strategic ad campaigns across Google, Meta, and LinkedIn. Maximize your ad spend with data-backed targeting and creative.</p>
+        <span class="service-tag">→ Avg. 312% ROAS</span>
+      </div>
+      <div class="service-card animate-in">
+        <div class="service-icon">📈</div>
+        <h3>Analytics & Reporting</h3>
+        <p>Custom dashboards, conversion tracking, and monthly performance reports so you always know what's working and why.</p>
+        <span class="service-tag">→ GA4, GTM, Looker Studio</span>
+      </div>
+      <div class="service-card animate-in">
+        <div class="service-icon">✍️</div>
+        <h3>Content Strategy</h3>
+        <p>Data-informed content calendars, blog strategy, and copywriting that ranks on search engines and resonates with your audience.</p>
+        <span class="service-tag">→ Content that converts</span>
+      </div>
+      <div class="service-card animate-in">
+        <div class="service-icon">🛡️</div>
+        <h3>Local SEO & GBP</h3>
+        <p>Dominate your local market with optimized Google Business Profile, local citations, and review management strategies.</p>
+        <span class="service-tag">→ Map pack rankings</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ PROCESS ════════════════ -->
+<section id="process" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-tag">Process</div>
+    <h2 class="section-title">How we get results.</h2>
+    <p class="section-subtitle">A proven, repeatable framework for turning traffic into revenue.</p>
+    <div class="process-grid">
+      <div class="process-step animate-in">
+        <span class="process-num">01</span>
+        <h3>Discovery & Audit</h3>
+        <p>Deep-dive into your current digital presence, competitors, and market opportunity. Full technical + content audit.</p>
+      </div>
+      <div class="process-step animate-in">
+        <span class="process-num">02</span>
+        <h3>Strategy & Roadmap</h3>
+        <p>Custom growth plan with prioritized initiatives, KPIs, and a clear 90-day action roadmap.</p>
+      </div>
+      <div class="process-step animate-in">
+        <span class="process-num">03</span>
+        <h3>Execute & Optimize</h3>
+        <p>Implement strategies across channels, A/B test continuously, and optimize based on real performance data.</p>
+      </div>
+      <div class="process-step animate-in">
+        <span class="process-num">04</span>
+        <h3>Report & Scale</h3>
+        <p>Monthly reporting with actionable insights. Double down on winners, cut losers, and scale what works.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ ABOUT ════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="section-tag">About</div>
+    <h2 class="section-title">Meet Al Mastro.</h2>
+    <p class="section-subtitle">Finance mind. Marketing instinct. Builder at heart.</p>
+    <div class="about-grid">
+      <div class="about-text animate-in">
+        <p>I'm a digital marketing consultant based in Columbus, Ohio, with 10+ years of experience helping businesses grow online. I hold a degree in Finance and Entrepreneurship from The Ohio State University, which gives me a unique ability to connect marketing strategy with real business outcomes.</p>
+        <p>My journey spans consulting with public corporations to empowering small businesses and startups. I've seen what works (and what doesn't) across industries, budgets, and business models.</p>
+        <p>Whether you need a full digital overhaul or a targeted SEO push, I approach every engagement like a partner — not a vendor. Your growth is my growth.</p>
+        <div class="about-credentials">
+          <div class="credential"><span class="icon">🎓</span> B.S. Finance & Entrepreneurship — The Ohio State University</div>
+          <div class="credential"><span class="icon">📍</span> Based in Columbus, OH — serving clients nationwide</div>
+          <div class="credential"><span class="icon">⚙️</span> 150+ projects delivered across web, SEO, and paid media</div>
+        </div>
+      </div>
+      <div class="about-terminal animate-in">
+        <div class="terminal-header">
+          <span class="terminal-dot terminal-dot--r"></span>
+          <span class="terminal-dot terminal-dot--y"></span>
+          <span class="terminal-dot terminal-dot--g"></span>
+          <span class="terminal-title">al@mastro-enterprises ~</span>
+        </div>
+        <div class="terminal-body">
+          <span class="prompt">$</span> <span class="cmd">cat skills.json</span><br>
+          <span class="output">{</span><br>
+          <span class="output">&nbsp;&nbsp;</span><span class="highlight">"seo"</span><span class="output">: ["technical", "local", "e-commerce"],</span><br>
+          <span class="output">&nbsp;&nbsp;</span><span class="highlight">"web_dev"</span><span class="output">: ["html/css", "wordpress", "react"],</span><br>
+          <span class="output">&nbsp;&nbsp;</span><span class="highlight">"analytics"</span><span class="output">: ["GA4", "GTM", "looker_studio"],</span><br>
+          <span class="output">&nbsp;&nbsp;</span><span class="highlight">"paid_media"</span><span class="output">: ["google_ads", "meta", "linkedin"],</span><br>
+          <span class="output">&nbsp;&nbsp;</span><span class="highlight">"tools"</span><span class="output">: ["semrush", "ahrefs", "screaming_frog"],</span><br>
+          <span class="output">&nbsp;&nbsp;</span><span class="highlight">"status"</span><span class="output">: "</span><span class="highlight">available_for_hire</span><span class="output">"</span><br>
+          <span class="output">}</span><br><br>
+          <span class="prompt">$</span> <span class="cmd">echo $PHILOSOPHY</span><br>
+          <span class="output">"No fluff. No vanity metrics. Just measurable growth."</span><br><br>
+          <span class="prompt">$</span> <span class="blink" style="color: var(--accent-green);">▌</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ TESTIMONIALS ════════════════ -->
+<section id="testimonials" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-tag">Results</div>
+    <h2 class="section-title">What clients are saying.</h2>
+    <p class="section-subtitle">Real feedback from real partnerships.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card animate-in">
+        <p>Mastro Enterprises completely transformed our online presence. Within 6 months we saw a massive increase in organic traffic and our lead generation tripled. Al's strategic approach is unmatched.</p>
+        <div class="testimonial-author">
+          <div class="name">Sarah T.</div>
+          <div class="role">Small Business Owner</div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-in">
+        <p>Working with Al felt like having a CMO on retainer. He didn't just build us a website — he built us a growth engine. The ROI on our ad spend has been incredible.</p>
+        <div class="testimonial-author">
+          <div class="name">Mike R.</div>
+          <div class="role">E-Commerce Founder</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ CONTACT ════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="section-tag">Contact</div>
+    <h2 class="section-title">Let's build something great.</h2>
+    <p class="section-subtitle">Ready to grow? Get in touch for a free consultation and site audit.</p>
+    <div class="contact-grid">
+      <div class="contact-info-block animate-in">
+        <h3>Get in Touch</h3>
+        <div class="contact-detail"><span class="icon">✉</span> al@mastroenterprises.com</div>
+        <div class="contact-detail"><span class="icon">📍</span> Columbus, OH 43205</div>
+        <div class="contact-detail"><span class="icon">🕐</span> Mon — Fri: 9:00am – 5:00pm EST</div>
+        <div class="contact-detail"><span class="icon">⚡</span> Typical response within 24 hours</div>
+      </div>
+      <div class="contact-form animate-in">
+        <h3>Start a Project</h3>
+        <form action="#" method="POST" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@company.com" required>
+          </div>
+          <div class="form-group">
+            <label for="service">Service Interested In</label>
+            <input type="text" id="service" name="service" placeholder="SEO, Web Dev, Paid Media...">
+          </div>
+          <div class="form-group">
+            <label for="message">Tell Me About Your Project</label>
+            <textarea id="message" name="message" placeholder="What are your goals? What challenges are you facing?"></textarea>
+          </div>
+          <button type="submit" class="form-submit">SEND INQUIRY →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo"><span class="dot"></span> MASTRO_ENTERPRISES</div>
+        <p>Digital marketing consultant specializing in SEO, web development, and data-driven growth strategies. Helping businesses turn traffic into revenue.</p>
+      </div>
+      <div class="footer-links-group">
+        <h4>Navigation</h4>
+        <a href="#hero">Home</a>
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-links-group">
+        <h4>Services</h4>
+        <a href="#services">SEO & Organic Growth</a>
+        <a href="#services">Web Development</a>
+        <a href="#services">Paid Media & PPC</a>
+        <a href="#services">Analytics & Reporting</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Mastro Enterprises, LLC. All rights reserved.</span>
+      <span>Built with precision in Columbus, OH</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Nav scroll effect ──
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ── Scroll-triggered animations ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+// ── Animated counters ──
+function animateCount(el, target) {
+  let current = 0;
+  const duration = 2000;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = Math.floor(current).toLocaleString();
+  }, 16);
+}
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const target = parseInt(entry.target.dataset.count);
+      if (target) animateCount(entry.target, target);
+      countObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+// ── Form handler placeholder ──
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = '✓ SENT — I\'LL BE IN TOUCH!';
+  btn.style.background = 'var(--accent-green)';
+  setTimeout(() => {
+    btn.textContent = 'SEND INQUIRY →';
+    btn.style.background = '';
+    e.target.reset();
+  }, 3000);
+}
+</script>
+</body>
+</html>
